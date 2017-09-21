@@ -1,7 +1,7 @@
 <?php
-session_start();
+session_start(); // self explanatory starts the session
 
-require_once 'vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 $provider = new \League\OAuth2\Client\Provider\GenericProvider([
     'clientId' => '<id>',

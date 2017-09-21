@@ -1,42 +1,54 @@
-Common Ledger - Developer Task - Intuit Integration
-===================================================
+# A starter webpack project for React, Redux, Express and Knex
 
-Scenario
-----------
+This is a rad base for starting a new full-stack project, or just as reference for how to do things the Harrison way (which is with absolutely no test folder, I'll leave that one to Alan)
 
-One of our less experienced developers has been tasked with creating a "Quick Books Online Data Explorer". Essentially we want to be able to explore the data for each of our QuickBooks Online clients from one place using the API access tokens we already have for them stored in our system.
+* Fork this repo to your github
+* Rename your repo according to the app you're building
+* Clone your forked repo down
+* Run the following commands in your terminal
 
-The application that our developer has put together is very bare-bones and a bit of a mess.
+```sh
+npm install
+knex migrate:latest
+knex seed:run
 
-The intention of the application is to be similar to the QBO API Explorer (https://developer.intuit.com/v2/apiexplorer?apiname=V3QBO)
+```
 
-Ideally we would be able to read and query all of the QBO API endpoints, we don't need to be able to create and update but that would be a bonus.
+  `npm run dev` for bundling, watch and nodemon
 
-You are tasked with taking over the project and making it a well structured, full featured application.
-
-We are looking for you to implement a best practices solution.
-
-You can choose whether you use a framework on the front and backend... or don't... you have full creative control. Feel free to choose a different language if you’re not comfortable in PHP.
+  `npm start` only runs server (setup for heroku)
 
 
-Setup
--------
+# Heroku!!!
 
-Go to this url: 'https://developer.intuit.com/' and register a new account.
+#### Creating your app
 
-When prompted select the 'QuickBooks Online' platform.
+Create your app with `heroku create [name]`
 
-Once registered create a new app by clicking on the 'Select APIs' button in the 'Just Start Coding' pane and select the Accounting API.
+You can check that this was successful by running `heroku apps` to view a list of your apps
 
-When your app is created, you'll be taken to the 'My Apps' dashboard where you can select your new app.
 
-Under the 'Keys' tab on your app dashboard you'll see your development client keys as well as redirect URIs.
+#### Adding postgres
 
-Click on the 'Add URI' link and add 'http://localhost:8080?action=oauth_callback' to your Redirect URIs, this will allow your local app to authenticate.
+Add postgresql (hobby dev) to your app at `https://dashboard.heroku.com/apps/[APP NAME HERE]/resources`
 
-That's it, you should be set to use this app with your test now.
+Check that pg has been added by running `heroku addons` to ensure the postgresql db is on your app
 
-Information
--------------
 
-The application is currently setup to be run with the built in PHP server by running the command 'php -S localhost:8080 index.php' from this directory.
+### Deploying!
+
+I have created several npm scripts that will be useful for deploying your app to heroku easily.
+
+`npm run h:deploy` will push your local master branch to your heroku app
+
+`npm run h:migrate` will run your knex migrations on your deployed heroku app
+
+`npm run h:seed` will run your seeds on your deployed app
+
+If ever you need to rollback, you can also just use `npm run h:rollback`
+
+
+## Ta-Da!
+Your app should be deployed!
+
+I can add some exercises/comments to this repo if there is desire for such, but for now, hopefully this proves useful :)
