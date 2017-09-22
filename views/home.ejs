@@ -1,0 +1,38 @@
+<html>
+<head>
+  <title>QBO Client Viewer</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div class="banner">
+    <img class="intuitlogo" src="../intuitlogo.png"></img>
+    <p class="connected">Connected!</p>
+  </div>
+  <div class="app">
+    <div class="center">
+  <h2>QuickBooks Viewer</h2>
+  <br /><br /><br />
+
+  <!-- Connect To QuickBooks Button -->
+  <b>Please Login to QuickBooks:</b><br />
+  <a class="imgLink" href="#" onclick="login('/connect_to_quickbooks')">
+    <img
+      style="height: 40px"
+      src="C2QB_white_btn_lg_default.png"
+      onmouseover="this.src='C2QB_white_btn_lg_hover.png'"
+      onmouseout="this.src='C2QB_white_btn_lg_default.png'"
+    />
+  </a>
+  <br /><br /><br />
+</div>
+</div>
+<script>
+  function login(path) {
+    window.location.assign(path)
+  }
+</script>
+
+</body>
+</html>
