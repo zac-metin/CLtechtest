@@ -14,6 +14,7 @@ router.get('/', function (req, res) {
   // Call OpenID endpoint
   // (this example uses the raw `https` npm module)
   // (see api_call.js for example using helper `request` npm module)
+  // the additional code in this app written on top of the oauth node sample app is the IP of Zac Metin and may not be reproduced without prior consent
   var options = token.sign(url.parse(tools.openid_uri))
   var request = https.request(options, (response) => {
     response.setEncoding('utf8');
