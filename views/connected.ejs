@@ -11,7 +11,7 @@
     var entityID = ""
     var queryStatement = ""
     var createName = ""
-    var createBody = {}
+    var createBody
 
     function storeResourceName() {
       resName = $("#resourceName").val();
@@ -35,6 +35,11 @@
       create = $("#createName").val();
       createName = create;
       $("#createtext").text(create);
+    }
+    function storeCreateBody() {
+      createB = $("#createBody").val();
+      createBody = createB;
+      $("#createbodytext").text(createB);
     }
 
     function apiCall() {
@@ -61,6 +66,12 @@
     function apiCreate() {
       $("#createresult").html('Fetching Resource')
       $.post(`/api_call/create/${createName}`, createBody, function(data) {
+        $("#createresult").html(JSON.stringify(data, null, 2))
+      })
+    }
+    function apiDelete() {
+      $("#createresult").html('Fetching Resource')
+      $.post(`/api_call/delete/${createName}`, function(data) {
         $("#createresult").html(JSON.stringify(data, null, 2))
       })
     }
@@ -98,16 +109,23 @@
         </div>
         <pre><code id="queryresult"></code></pre>
       </div>
+      <br><br>
 
       <div class="apiform">
-        <p class="apiurl"><b>CREATE / UPDATE </b> API Request to: Base URL/company/realmID/<span id="createtext">resourceName</span></p>
+        <p class="apiurl"><b>CREATE / UPDATE /DELETE</b> API Request to: Base URL/company/realmID/<span id="createtext">resourceName</span> (+ "?operation=delete") if deleting</p>
         <div class="innerapiform">
           <label>Created/Updated Resource Name
-        <input type="text" id="createName" onchange="storeCreate()"/></label>
+        <input type="text" id="createName" onchange="storeCreateName()"/></label>
+        <label>Data Body to Create/Update:
+        <textarea id="createBody" onchange="storeCreateBody()"></textarea></label>
+        <div id="createbodytext"></div>
+        <br><br>
           <button onclick="apiCreate()">CREATE / UPDATE</button>
+          <button onclick="apiDelete()">DELETE</button>
         </div>
         <pre><code id="createresult"></code></pre>
       </div>
+      <br><br>
 
     </div>
 </body>
