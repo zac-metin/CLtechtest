@@ -80,7 +80,8 @@ router.get('/query/:queryStatement', function (req, res) {
     error: 'No realm ID.  QBO calls only work if the accounting scope was passed!'
   })
 
-  var url = config.api_uri + req.session.realmId + 'query?query=' + req.params.queryStatement
+  var preEncodeUrl = config.api_uri + req.session.realmId + '/query?query=' + req.params.queryStatement
+  var url = encodeURI(preEncodeUrl)
   console.log('Making API call to: ' + url)
   var requestObj = {
     url: url,
