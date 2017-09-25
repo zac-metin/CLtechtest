@@ -1,0 +1,133 @@
+<html>
+
+<head>
+  <title>OAuth2 Sample App - Intuit</title>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <link rel="stylesheet" type="text/css" href="../style.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script>
+    var resourceName = ""
+    var entityID = ""
+    var queryStatement = ""
+    var createName = ""
+    var createBody
+
+    function storeResourceName() {
+      resName = $("#resourceName").val();
+      resourceName = resName;
+      $("#nameResource").text(resName);
+    }
+
+    function storeEntityId() {
+      eid = $("#entityID").val();
+      entityID = eid;
+      $("#eid").text(eid);
+    }
+
+    function storeQuery() {
+      query = $("#queryStatement").val();
+      queryStatement = query;
+      $("#querytext").text(query);
+    }
+
+    function storeCreateName() {
+      create = $("#createName").val();
+      createName = create;
+      $("#createtext").text(create);
+    }
+    function storeCreateBody() {
+      createB = $("#createBody").val();
+      createBody = createB;
+      $("#createbodytext").text(createB);
+    }
+
+    function apiCall() {
+      $("#readresult").html('Loading...')
+      $.get("/api_call", function(data) {
+        $("#readresult").html(JSON.stringify(data, null, 2))
+      })
+    }
+
+    function apiRead() {
+      $("#readresult").html('Fetching Resource')
+      $.get(`/api_call/resourceName/${resourceName}/entityID/${entityID}`, function(data) {
+        $("#readresult").html(JSON.stringify(data, null, 2))
+      })
+    }
+
+    function apiQuery() {
+      $("#queryresult").html('Fetching Resource')
+      $.get(`/api_call/query/${queryStatement}`, function(data) {
+        $("#queryresult").html(JSON.stringify(data, null, 2))
+      })
+    }
+
+    function apiCreate() {
+      $("#createresult").html('Fetching Resource')
+      $.post(`/api_call/create/${createName}`, createBody, function(data) {
+        $("#createresult").html(JSON.stringify(data, null, 2))
+      })
+    }
+    function apiDelete() {
+      $("#createresult").html('Fetching Resource')
+      $.post(`/api_call/delete/${createName}`, function(data) {
+        $("#createresult").html(JSON.stringify(data, null, 2))
+      })
+    }
+
+  </script>
+</head>
+
+<body>
+  <div class="banner">
+    <img class="intuitlogo" src="../intuitlogo.png"></img>
+    <p class="connected">Connected!</p>
+  </div>
+  <div class="app">
+      <div class="demo"><button onClick="apiCall()">DEMO API CALL</button></div>
+      <br><br>
+
+      <div class="apiform">
+        <p class="apiurl"><b>READ</b> API Request to: Base URL/company/realmID/<span id="nameResource">resourceName</span>/<span id="eid">entityID</span><br><br></p>
+        <div class="innerapiform"><label>Resource Name
+        <input type="text" id="resourceName" onchange="storeResourceName()"/></label>
+          <label>Entity ID
+        <input type="text" id="entityID" onchange="storeEntityId()"/></label>
+          <button onclick="apiRead()">READ</button>
+        </div>
+        <pre><code id="readresult"></code></pre>
+      </div>
+      <br><br>
+
+      <div class="apiform">
+        <p class="apiurl"><b>QUERY</b> API Request to: Base URL/company/realmID/query?query=<span id="querytext">query</span></p>
+        <div class="innerapiform">
+          <label>Query Statement
+        <input type="text" id="queryStatement" onchange="storeQuery()"/></label>
+          <button onclick="apiQuery()">QUERY</button>
+        </div>
+        <pre><code id="queryresult"></code></pre>
+      </div>
+      <br><br>
+
+      <div class="apiform">
+        <p class="apiurl"><b>CREATE / UPDATE /DELETE</b> API Request to: Base URL/company/realmID/<span id="createtext">resourceName</span> (+ "?operation=delete") if deleting</p>
+        <div class="innerapiform">
+          <label>Created/Updated Resource Name
+        <input type="text" id="createName" onchange="storeCreateName()"/></label>
+        <label>Data Body to Create/Update:
+        <textarea id="createBody" onchange="storeCreateBody()"></textarea></label>
+        <div id="createbodytext"></div>
+        <br><br>
+          <button onclick="apiCreate()">CREATE / UPDATE</button>
+          <button onclick="apiDelete()">DELETE</button>
+        </div>
+        <pre><code id="createresult"></code></pre>
+      </div>
+      <br><br>
+
+    </div>
+</body>
+
+</html>
