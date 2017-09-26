@@ -27,6 +27,7 @@
     "rsa-pem-from-mod-exp": "^0.8.4"
   },
   "devDependencies": {
+    "enzyme": "^2.9.1",
     "jest": "^21.1.0",
     "nock": "^9.0.20"
   }

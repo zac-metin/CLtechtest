@@ -113,7 +113,6 @@ router.post('/create/:createName', function (req, res) {
 
   var url = config.api_uri + req.session.realmId + '/' + req.params.createName
   console.log('Making API create / update call to: ' + url)
-  console.log('Sending the following infoo: ' + req.body)
   var requestObj = {
     url: url,
     headers: {
@@ -144,7 +143,7 @@ router.post('/delete/:createName', function (req, res) {
     error: 'No realm ID.  QBO calls only work if the accounting scope was passed!'
   })
 
-  var url = config.api_uri + req.session.realmId + '/' + req.params.resourceName + "?operation=delete"
+  var url = config.api_uri + req.session.realmId + '/' + req.params.createName + "?operation=delete"
   console.log('Making API deletion call to: ' + url)
   var requestObj = {
     url: url,
